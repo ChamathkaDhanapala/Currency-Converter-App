@@ -1,39 +1,44 @@
 
-import { StyleSheet,  View, ScrollView } from 'react-native';
-import { PaperProvider,Text, Divider, TextInput} from 'react-native-paper';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { PaperProvider, Text, Divider, TextInput } from 'react-native-paper';
 
 export default function App() {
   const [amount, setAmount] = useState('');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
-
+  const [convertedAmount, setConvertedAmount] = useState(null);
   return (
     <PaperProvider>
       <ScrollView>
         <View style={styles.container}>
           <Text variant="headlineLarge">Currency Converter</Text>
-          <Divider/>
+          <Divider />
           <TextInput
             label="Amount"
             value={amount}
             onChangeText={setAmount}
             keyboardType="numeric"
           />
-           <TextInput
+          <TextInput
             label="From Currency"
             value={fromCurrency}
             onChangeText={setFromCurrency}
-           
+
           />
           <TextInput
             label="To Currency"
             value={toCurrency}
             onChangeText={setToCurrency}
-            
+
           />
-           <Button mode="contained" onPress={handleConversion} style={styles.button}>
+          <Button mode="contained" onPress={handleConversion} style={styles.button}>
             Convert
           </Button>
+          {convertedAmount && (
+            <Text variant="bodyMedium" style={styles.result}>
+              Converted Amount: {convertedAmount} {toCurrency}
+            </Text>
+          )}
 
         </View>
       </ScrollView>
