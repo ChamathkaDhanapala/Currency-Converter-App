@@ -1,16 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import { PaperProvider } from 'react-native-paper';
+
+import { StyleSheet,  View, ScrollView } from 'react-native';
+import { PaperProvider,Text, Divider, TextInput} from 'react-native-paper';
+
+const MyComponent = () => {
+  const [text, setText] = React.useState("");
+};
 
 export default function App() {
   return (
     <PaperProvider>
       <ScrollView>
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-    </ScrollView>
+        <View style={styles.container}>
+          <Text variant="headlineLarge">Currency Converter</Text>
+          <Divider/>
+          <TextInput
+            label="Amount"
+            value={amount}
+            onChangeText={setAmount}
+            keyboardType="numeric"
+          />
+           <TextInput
+            label="From Currency"
+            value={fromCurrency}
+            onChangeText={setFromCurrency}
+           
+          />
+          <TextInput
+            label="To Currency"
+            value={toCurrency}
+            onChangeText={setToCurrency}
+            
+          />
+
+        </View>
+      </ScrollView>
     </PaperProvider>
   );
 }
@@ -23,3 +46,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
