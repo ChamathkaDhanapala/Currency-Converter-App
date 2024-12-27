@@ -1,12 +1,36 @@
-
+import React, { useState } from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import { PaperProvider, Text, Divider, TextInput } from 'react-native-paper';
+import { PaperProvider, Text, TextInput, Button, Divider } from 'react-native-paper';
 
 export default function App() {
   const [amount, setAmount] = useState('');
   const [fromCurrency, setFromCurrency] = useState('USD');
   const [toCurrency, setToCurrency] = useState('EUR');
   const [convertedAmount, setConvertedAmount] = useState(null);
+
+  const handleConversion = async () => {
+    try {
+      if (!amount || isNaN(amount)) {
+        console.error('Please enter a valid number for amount');
+        return;  // Prevent conversion if amount is invalid
+      }
+  
+      const response = await axios.get(`https://api.exchangerate-api.com/v4/latest/${fromCurrency}`);
+      
+      if (!response.data.rates[toCurrency]) {
+        console.error('Invalid target currency');
+        return;  // Handle case where the target currency is invalid
+      }
+  
+      const rate = response.data.rates[toCurrency];
+      const result = (parseFloat(amount) * rate).toFixed(2);  // Parse amount to float for multiplication
+      setConvertedAmount(result);
+    } catch (error) {
+      console.error('Error fetching conversion data:', error);
+    }
+  };
+  
+
   return (
     <PaperProvider>
       <ScrollView>
