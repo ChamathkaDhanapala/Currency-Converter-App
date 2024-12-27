@@ -31,6 +31,9 @@ export default function App() {
             onChangeText={setToCurrency}
             
           />
+           <Button mode="contained" onPress={handleConversion} style={styles.button}>
+            Convert
+          </Button>
 
         </View>
       </ScrollView>
