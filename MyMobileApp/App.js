@@ -2,11 +2,11 @@
 import { StyleSheet,  View, ScrollView } from 'react-native';
 import { PaperProvider,Text, Divider, TextInput} from 'react-native-paper';
 
-const MyComponent = () => {
-  const [text, setText] = React.useState("");
-};
-
 export default function App() {
+  const [amount, setAmount] = useState('');
+  const [fromCurrency, setFromCurrency] = useState('USD');
+  const [toCurrency, setToCurrency] = useState('EUR');
+
   return (
     <PaperProvider>
       <ScrollView>
